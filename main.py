@@ -54,6 +54,8 @@ async def upload_file(container, filename, cs):
         await blob.upload_blob(data)
     print('Uploading Blob End')
 
+    os.remove(filename)
+
 async def main():
 
     experiment_id = str(uuid.uuid4())
