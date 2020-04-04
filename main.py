@@ -84,16 +84,11 @@ async def main():
         filename = experiment_id + '-' + throw_id
 
         record_video(camera, filename)
-        capture_image(camera, filename)
 
         send_message("PI:RELOAD", ser)
 
         await upload_file(
-            'auto-yahtzee-raw-image-container', 
-            '/home/pi/Desktop/throws/' + filename+ '.jpg', cs)
-
-        await upload_file(
-            'auto-yahtzee-raw-video-container',
+            'autoyahtzee-raw-video-container',
             '/home/pi/Desktop/throws/' + filename + '.mp4', cs)
 
         send_message("PI:RELOAD", ser)
