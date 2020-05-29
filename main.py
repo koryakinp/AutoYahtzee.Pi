@@ -27,8 +27,8 @@ def record_video(camera, filename):
 
     print('Recording Video Start')
 
-    camera.start_recording(path + '.h264', quality=25)
-    time.sleep(3)
+    camera.start_recording(path + '.h264', quality=20)
+    time.sleep(4)
     camera.stop_recording()
 
     print('Recording Video End')
@@ -58,8 +58,6 @@ async def upload_file(container, filename, cs):
 
 async def main():
 
-    experiment_id = str(uuid.uuid4())
-
     with open('config.json') as f:
         d = json.load(f)
         cs = d['BlobConnectionString']
@@ -71,6 +69,8 @@ async def main():
     camera.framerate = 90
     camera.color_effects = (128,128)
     camera.brightness = 60
+    camera.contrast = 15
+
     receive_message("ARDUINO:COMMUNICATION HANDSHAKE", ser)
     send_message("PI:COMMUNICATION HANDSHAKE", ser)
 
@@ -79,16 +79,14 @@ async def main():
 
         send_message("PI:THROW", ser)
         
-        throw_id = str(uuid.uuid4())
-
-        filename = experiment_id + '-' + throw_id
+        filename = str(uuid.uuid4())
 
         record_video(camera, filename)
 
         send_message("PI:RELOAD", ser)
 
         await upload_file(
-            'autoyahtzee-raw-video-container',
+            'autoyahtzee-raw-video-container-test',
             '/home/pi/Desktop/throws/' + filename + '.mp4', cs)
 
         send_message("PI:RELOAD", ser)
