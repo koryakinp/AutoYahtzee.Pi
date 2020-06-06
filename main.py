@@ -86,7 +86,7 @@ async def main():
         send_message("PI:RELOAD", ser)
 
         await upload_file(
-            'autoyahtzee-raw-video-container-test',
+            'autoyahtzee-raw-video-container',
             '/home/pi/Desktop/throws/' + filename + '.mp4', cs)
 
         send_message("PI:RELOAD", ser)
