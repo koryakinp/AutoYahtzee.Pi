@@ -68,8 +68,8 @@ async def main():
     camera.resolution = (480, 480)
     camera.framerate = 90
     camera.color_effects = (128,128)
-    camera.brightness = 60
-    camera.contrast = 15
+    camera.brightness = 65
+    camera.contrast = 30
 
     receive_message("ARDUINO:COMMUNICATION HANDSHAKE", ser)
     send_message("PI:COMMUNICATION HANDSHAKE", ser)
